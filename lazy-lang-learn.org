@@ -21,6 +21,13 @@ Lazy timer based display of things to learn. Ability to recall and translate wit
   Stores it in ~lazy-lang-learn--history~ which can be browsed and translated via ~lazy-lang-learn--translate-from-history~. Newly displayed snippets can be immediately translated
   using ~lazy-lang-learn-translate~.
 
+
+** Screencast
+   A short [[https://www.youtube.com/watch?v=FiqfG33UwA4][video]] of lazy-lang-learn hosted on YouTube demonstrating it's usage. The first few seconds are blurred. No idea why but the rest is ok...
+   #+begin_src emacs-lisp
+     ffmpeg -video_size 1920x1080 -framerate 25 -f x11grab -i :0.0+0,0 output.mp4
+   #+end_src
+
 ** Screenshots
 *** A new snippet pops after ~lazy-lang-learn--period~
     #+CAPTION: lazy-lang-learn display new snippet using alert library
@@ -50,14 +57,30 @@ Lazy timer based display of things to learn. Ability to recall and translate wit
 
 ** usage
 
+   ~C-u lazy-lang-learn-translate~ will translate a random snippet from the history.
+
    #+begin_src emacs-lisp
      (use-package lazy-lang-learn
        :straight (lazy-lang-learn :local-repo "~/development/projects/emacs/lazy-lang-learn" :type git :host github :repo "rileyrg/lazy-lang-learn" )
        :bind
        ("C-c L" . lazy-lang-learn-mode)
-       ("<f12>" . lazy-lang-learn-translate)
+       ("<f12>" . lazy-lang-learn-translate) ;; C-u f12 to translate a random history element.
+       ("C-S-<f12>" . lazy-lang-learn-translate-random) ;; same as C-u lazy-lang-learn-translate
        ("S-<f12>" . lazy-lang-learn-translate-from-history))
    #+end_src
+
+*** key functions
+
+**** ~lazy-lang-learn-new~
+     display a new snippet
+**** ~lazy-lang-learn-translate~
+     translate last snippet displayed or translated. Prefix (C-u) to pick a random one from history.
+**** ~lazy-lang-learn-translate-random~
+     translates a random element from history - calls ~lazy-lang-learn-translate~
+**** ~lazy-lang-learn-translate-from-history~
+
+
+     interactively select from history and translate
 
 ** customisation
    Customisation group ~lazy-lang-learn~
@@ -88,3 +111,8 @@ Lazy timer based display of things to learn. Ability to recall and translate wit
 *** [#A] hot key to remove immediately last snippet
 *** [#B] delete from history
 *** [#C] migrate the history format to an org file maybe so add things like view count etc etc
+*** DONE [#B] random translate from history                         :ARCHIVE:
+    CLOSED: [2021-05-15 Sat 00:04]
+    :LOGBOOK:
+    - State "DONE"       from              [2021-05-15 Sat 00:04]
+    :END:

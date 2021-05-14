@@ -76,20 +76,6 @@
               (read (current-buffer)))
           nil)))
 
-;;;###autoload
-(defun lazy-lang-learn-translate-from-history()
-  "Prompt for a learn item from history.  Stick it as the first entry."
-  (interactive)
-  (if lazy-lang-learn--history ;; select from old ones by bubbling one to top
-      (let ((learn (completing-read "Select learn:" lazy-lang-learn--history)))
-        (when learn
-          (lazy-lang-learn-translate learn))
-    (message "No previous learns."))))
-
-(defun lazy-lang-learn--german-fortune()
-  "Return a german fortune string."
-  (shell-command-to-string "fortune de"))
-
 (require 'alert)
 
 ;;;###autoload
@@ -116,9 +102,11 @@ save it in `lazy-lang-learn--history-file'."
 
 ;;;###autoload
 (defun lazy-lang-learn-translate(&optional learn)
-  "Translate LEARN the first element in `lazy-lang-learn--history'."
+  "Translate LEARN or if PREFIX then random element in `lazy-lang-learn--history'."
   (interactive)
-  (let ((learn (if learn learn (car lazy-lang-learn--history))))
+  (let ((learn (if learn learn
+                 (if current-prefix-arg (seq-random-elt lazy-lang-learn--history)
+                   (car lazy-lang-learn--history)))))
     (if learn
         (progn
           (setq lazy-lang-learn--history (cons learn (remove learn lazy-lang-learn--history)))
@@ -127,6 +115,27 @@ save it in `lazy-lang-learn--history-file'."
           (if lazy-lang-learn--set-focus
               (select-window (display-buffer "*Google Translate*"))))
       (message "No learn to translate"))))
+
+;;;###autoload
+(defun lazy-lang-learn-translate-random()
+  "Translate  random element in `lazy-lang-learn--history'."
+  (interactive)
+  (let ((current-prefix-arg 1))
+    (call-interactively 'lazy-lang-learn-translate)))
+
+;;;###autoload
+(defun lazy-lang-learn-translate-from-history()
+  "Prompt for a learn item from history.  Stick it as the first entry."
+  (interactive)
+  (if lazy-lang-learn--history ;; select from old ones by bubbling one to top
+      (let ((learn (completing-read "Select learn:" lazy-lang-learn--history)))
+        (when learn
+          (lazy-lang-learn-translate learn))
+    (message "No previous learns."))))
+
+(defun lazy-lang-learn--german-fortune()
+  "Return a german fortune string."
+  (shell-command-to-string "fortune de"))
 
 ;;;###autoload
 (define-minor-mode lazy-lang-learn-mode
