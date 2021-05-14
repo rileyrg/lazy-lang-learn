@@ -1,0 +1,7 @@
+*
+!.gitignore
+!lazy-lang-learn.el
+!lazy-lang-learn.org
+!README.md
+!images
+!images/*

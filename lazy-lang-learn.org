@@ -1,0 +1,89 @@
+#+TITLE: Lazy Lang Learn : Lazy Language Learning In Emacs
+#+AUTHOR: rileyrg
+#+EMAIL: rileyrg at g m x dot de
+
+#+LANGUAGE: en
+#+STARTUP: showall
+
+#+EXPORT_FILE_NAME: README.md
+#+OPTIONS: toc:8 num:nil
+
+#+category: emacs
+#+FILETAGS: :elisp::emacs:github:orgmode:translation
+
+#+PROPERTY: header-args:bash :tangle-mode (identity #o755)
+
+Lazy timer based display of things to learn. Ability to recall and translate with presistance across sessions.
+
+* lazy-lang-learn.el periodic display of new snippet to translate
+
+  Defines a new minor-mode ~lazy-lang-learn-mode~ which calls out to ~lazy-lang-learn--function~ for a new snippet and displays it with ~lazy-lang-learn--display-function~.
+  Stores it in ~lazy-lang-learn--history~ which can be browsed and translated via ~lazy-lang-learn--translate-from-history~. Newly displayed snippets can be immediately translated
+  using ~lazy-lang-learn-translate~.
+
+** Screenshots
+*** A new snippet pops after ~lazy-lang-learn--period~
+    #+CAPTION: lazy-lang-learn display new snippet using alert library
+    [[file:images/lazy-lang-learn--new.png]]
+*** translate it with ~lazy-lang-learn-translate~
+    #+CAPTION: lazy-lang-learn translate latest snippet
+    [[file:images/lazy-lang-learn--translate.png]]
+*** translate older snippets  with ~lazy-lang-learn-translate-from-history~
+    #+CAPTION: lazy-lang-learn translate from history
+    [[file:images/lazy-lang-learn--translate-from-history.png]]
+
+
+** requirements
+
+*** google-translate
+    This whole thing is based around using [[https://github.com/atykhonov/google-translate][google-translate]], a package that allows you to translate strings using Google Translate service directly from GNU Emacs.
+
+*** alert
+    The default ~lazy-lang-learn--display-function~ is set to ~'alert~. See [[https://github.com/jwiegley/alert][alert]].
+
+*** fortunes-de
+    Debian comes with ~fortunes-de~ which is the default snippet generator used by ~lazy-lang-learn--function~ default function ~lazy-lang-learn--german-fortune~.
+    #+begin_src bash
+       sudo apt install fortunes-de
+    #+end_src
+
+** usage
+
+   #+begin_src emacs-lisp
+     (use-package lazy-lang-learn
+       :straight (lazy-lang-learn :local-repo "~/development/projects/emacs/lazy-lang-learn" :type git :host github :repo "rileyrg/lazy-lang-learn" )
+       :bind
+       ("C-c L" . lazy-lang-learn-mode)
+       ("<f12>" . lazy-lang-learn-translate)
+       ("S-<f12>" . lazy-lang-learn-translate-from-history))
+   #+end_src
+
+** customisation
+   Customisation group ~lazy-lang-learn~
+*** ~lazy-lang-learn--period~
+    Idle time in seconds before it fetches a new snippet to display
+*** ~lazy-lang-learn--function~
+    Holds the name of a function to return snippets to store and later translate. Currently defaults to ~lazy-lang-learn--german-fortune~ which
+    simply calls out to the shell to get a unix fortune snippet...
+    #+begin_src emacs-lisp
+      (defun lazy-lang-learn--german-fortune()
+        "Return a german fortune string."
+        (shell-command-to-string "fortune de"))
+    #+end_src
+*** ~lazy-lang-learn--display-function~
+    Holds the name of a function to display new snippets to browse. Defaults to [[https://github.com/jwiegley/alert][alert]].
+*** ~lazy-lang-learn--history-length~
+    How many snippets to keep and save in ~lazy-lang-learn--history-file~
+*** ~lazy-lang-learn--history-file~
+    The file used to store language snippets.
+*** ~lazy-lang-learn--lighter~
+    The minor mode indicator in the mode line.
+
+
+
+** TODO
+
+*** [#A] have the minor mode timer pop up existing ones from the history if so configured.
+*** [#A] hot key to remove immediately last snippet
+*** [#B] delete from history
+*** [#C] migrate the history format to an org file maybe so add things like view count etc etc
