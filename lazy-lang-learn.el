@@ -94,8 +94,9 @@
 
 ;;;###autoload
 (defun lazy-lang-learn-new()
-  "Call the funtion defined in `lazy-lang-learn--function' and pop it up.
-Save it in `lazy-lang-learn--history-file' if so configured."
+  "Create a new snippet with `lazy-lang-learn--function'.
+Display with `lazy-lang-learn--display-function' and
+save it in `lazy-lang-learn--history-file'."
   (interactive)
   (let ((alert-fade-time lazy-lang-learn--fade-time)
         (learn (funcall lazy-lang-learn--function)))

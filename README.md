@@ -1,82 +1,82 @@
-- [lazy-lang-learn.el periodic display of new snippet to translate](#orgdb75651)
-  - [Screenshots](#org939d947)
-    - [A new snippet pops after `lazy-lang-learn--period`](#org02e8518)
-    - [translate it with `lazy-lang-learn-translate`](#orgb24155c)
-    - [translate older snippets  with `lazy-lang-learn-translate-from-history`](#org0cf8ca9)
-  - [requirements](#org572dd2d)
-    - [google-translate](#orgb2b3352)
-    - [alert](#org2f5d663)
-    - [fortunes-de](#org9dd38ad)
-  - [usage](#orgd2f932c)
-  - [customisation](#org83cac14)
-    - [`lazy-lang-learn--period`](#org1c4c1f4)
-    - [`lazy-lang-learn--function`](#org39f625f)
-    - [`lazy-lang-learn--display-function`](#orgb73fe5f)
-    - [`lazy-lang-learn--history-length`](#org067a170)
-    - [`lazy-lang-learn--history-file`](#org698eb27)
-    - [`lazy-lang-learn--lighter`](#org8638d18)
-  - [TODO](#org1990fc2)
-    - [have the minor mode timer pop up existing ones from the history if so configured.](#org9eb4c18)
-    - [hot key to remove immediately last snippet](#org13816a4)
-    - [delete from history](#org1fb61a1)
-    - [migrate the history format to an org file maybe so add things like view count etc etc](#org0623e83)
+- [lazy-lang-learn.el periodic display of new snippet to translate](#org0da95c9)
+  - [Screenshots](#orgd16b2b5)
+    - [A new snippet pops after `lazy-lang-learn--period`](#org8a9c499)
+    - [translate it with `lazy-lang-learn-translate`](#org0d9b697)
+    - [translate older snippets  with `lazy-lang-learn-translate-from-history`](#org4c325e5)
+  - [requirements](#org04f5e83)
+    - [google-translate](#orge2188e1)
+    - [alert](#org2c8e6c4)
+    - [fortunes-de](#orgd2739e7)
+  - [usage](#orga43457c)
+  - [customisation](#org11c5383)
+    - [`lazy-lang-learn--period`](#orge98a581)
+    - [`lazy-lang-learn--function`](#org095c8eb)
+    - [`lazy-lang-learn--display-function`](#orgc0097e5)
+    - [`lazy-lang-learn--history-length`](#orgad7491c)
+    - [`lazy-lang-learn--history-file`](#orgec251c3)
+    - [`lazy-lang-learn--lighter`](#org755bc8c)
+  - [TODO](#orgd6f724f)
+    - [have the minor mode timer pop up existing ones from the history if so configured.](#org5bb84c0)
+    - [hot key to remove immediately last snippet](#orge7cd7d1)
+    - [delete from history](#org6292857)
+    - [migrate the history format to an org file maybe so add things like view count etc etc](#org68703b2)
 
 Lazy timer based display of things to learn. Ability to recall and translate with presistance across sessions.
 
 
-<a id="orgdb75651"></a>
+<a id="org0da95c9"></a>
 
 # lazy-lang-learn.el periodic display of new snippet to translate
 
 Defines a new minor-mode `lazy-lang-learn-mode` which calls out to `lazy-lang-learn--function` for a new snippet and displays it with `lazy-lang-learn--display-function`. Stores it in `lazy-lang-learn--history` which can be browsed and translated via `lazy-lang-learn--translate-from-history`. Newly displayed snippets can be immediately translated using `lazy-lang-learn-translate`.
 
 
-<a id="org939d947"></a>
+<a id="orgd16b2b5"></a>
 
 ## Screenshots
 
 
-<a id="org02e8518"></a>
+<a id="org8a9c499"></a>
 
 ### A new snippet pops after `lazy-lang-learn--period`
 
 ![img](images/lazy-lang-learn--new.png "lazy-lang-learn display new snippet using alert library")
 
 
-<a id="orgb24155c"></a>
+<a id="org0d9b697"></a>
 
 ### translate it with `lazy-lang-learn-translate`
 
 ![img](images/lazy-lang-learn--translate.png "lazy-lang-learn translate latest snippet")
 
 
-<a id="org0cf8ca9"></a>
+<a id="org4c325e5"></a>
 
 ### translate older snippets  with `lazy-lang-learn-translate-from-history`
 
 ![img](images/lazy-lang-learn--translate-from-history.png "lazy-lang-learn translate from history")
 
 
-<a id="org572dd2d"></a>
+<a id="org04f5e83"></a>
 
 ## requirements
 
 
-<a id="orgb2b3352"></a>
+<a id="orge2188e1"></a>
 
 ### google-translate
 
-This whole thing is based around using [google-translate](https://github.com/atykhonov/google-translate), a package that allows you to translate strings using Google Translate service directly from GNU Emacs.
+This whole thing is based around using [google-translate](https://github.com/atykhonov/google-translate), a package that allows you to translate strings using Google Translate service directly from GNU Emacs. I have some customisations to this which can be found under [my own emacs configuration](https://github.com/rileyrg/Emacs-Customisations) in [rgr/google.el](https://github.com/rileyrg/Emacs-Customisations/blob/master/etc/elisp/rgr-google.el)
 
 
-<a id="org2f5d663"></a>
+<a id="org2c8e6c4"></a>
 
 ### alert
 
 The default `lazy-lang-learn--display-function` is set to `'alert`. See [alert](https://github.com/jwiegley/alert).
 
 
-<a id="org9dd38ad"></a>
+<a id="orgd2739e7"></a>
 
 ### fortunes-de
 
@@ -87,7 +87,7 @@ sudo apt install fortunes-de
 ```
 
 
-<a id="orgd2f932c"></a>
+<a id="orga43457c"></a>
 
 ## usage
 
@@ -101,21 +101,21 @@ sudo apt install fortunes-de
 ```
 
 
-<a id="org83cac14"></a>
+<a id="org11c5383"></a>
 
 ## customisation
 
 Customisation group `lazy-lang-learn`
 
 
-<a id="org1c4c1f4"></a>
+<a id="orge98a581"></a>
 
 ### `lazy-lang-learn--period`
 
 Idle time in seconds before it fetches a new snippet to display
 
 
-<a id="org39f625f"></a>
+<a id="org095c8eb"></a>
 
 ### `lazy-lang-learn--function`
 
@@ -128,54 +128,54 @@ Holds the name of a function to return snippets to store and later translate. Cu
 ```
 
 
-<a id="orgb73fe5f"></a>
+<a id="orgc0097e5"></a>
 
 ### `lazy-lang-learn--display-function`
 
 Holds the name of a function to display new snippets to browse. Defaults to [alert](https://github.com/jwiegley/alert).
 
 
-<a id="org067a170"></a>
+<a id="orgad7491c"></a>
 
 ### `lazy-lang-learn--history-length`
 
 How many snippets to keep and save in `lazy-lang-learn--history-file`
 
 
-<a id="org698eb27"></a>
+<a id="orgec251c3"></a>
 
 ### `lazy-lang-learn--history-file`
 
 The file used to store language snippets.
 
 
-<a id="org8638d18"></a>
+<a id="org755bc8c"></a>
 
 ### `lazy-lang-learn--lighter`
 
 The minor mode indicator in the mode line.
 
 
-<a id="org1990fc2"></a>
+<a id="orgd6f724f"></a>
 
 ## TODO
 
 
-<a id="org9eb4c18"></a>
+<a id="org5bb84c0"></a>
 
 ### have the minor mode timer pop up existing ones from the history if so configured.
 
 
-<a id="org13816a4"></a>
+<a id="orge7cd7d1"></a>
 
 ### hot key to remove immediately last snippet
 
 
-<a id="org1fb61a1"></a>
+<a id="org6292857"></a>
 
 ### delete from history
 
 
-<a id="org0623e83"></a>
+<a id="org68703b2"></a>
 
 ### migrate the history format to an org file maybe so add things like view count etc etc

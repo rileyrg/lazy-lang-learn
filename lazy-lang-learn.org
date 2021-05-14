@@ -37,6 +37,7 @@ Lazy timer based display of things to learn. Ability to recall and translate wit
 
 *** google-translate
     This whole thing is based around using [[https://github.com/atykhonov/google-translate][google-translate]], a package that allows you to translate strings using Google Translate service directly from GNU Emacs.
+    I have some customisations to this which can be found under [[https://github.com/rileyrg/Emacs-Customisations][my own emacs configuration]] in [[https://github.com/rileyrg/Emacs-Customisations/blob/master/etc/elisp/rgr-google.el][rgr/google.el]]
 
 *** alert
     The default ~lazy-lang-learn--display-function~ is set to ~'alert~. See [[https://github.com/jwiegley/alert][alert]].
