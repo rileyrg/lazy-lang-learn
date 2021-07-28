@@ -1,5 +1,7 @@
 ;;; lazy-lang-learn.el --- A global minor-mode to periodically display an item to learn
 ;;
+;; maintained in lazy-lang-learn.org
+;;
 ;; Copyright (C) 2010-2021 rileyrg
 ;;
 ;; Author: rileyrg <rileyrg@gmx.de>
